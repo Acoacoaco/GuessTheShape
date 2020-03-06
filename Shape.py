@@ -1,11 +1,14 @@
+# modules
 import random
 
+# class of shapes
 class Shape:
     def __init__(self, name, *lines):
         self.name = name
         self.lines = lines
 
     def printFullAnswer(self):
+        print("")
         for line in self.lines:
             print(line)
         print("")
@@ -13,8 +16,37 @@ class Shape:
     def addToShapeList(self):
         shape_list.append(self)
 
+# class of game
+class Game:
+    def __init__(self):
+        # strings
+        self.double_line = "\n======================================================="
+        self.instructions = "\n\tWelcome to the \"GUESS THE SHAPE\" game!\nTry to guess the shape (in ASCII art), presented below."
+
+    # ask user to play again
+    def playAgain(self):
+        restart = input("Do you want to play again? [y/n]: ")
+        if restart == "y":
+            self.gameRestart()
+        elif restart == "n":
+            exit()
+        else:
+            print("Wrong command!")
+
+    # restart the game
+    def gameRestart(self):
+        import sys
+        print("The game will restart now.")
+        import os
+        os.execv(sys.executable, ['python'] + sys.argv)
+
+# game
+game = Game()
+
+# list of shapes
 shape_list = []
 
+# shapes
 cat = Shape("cat", 
     "|\\---/|", 
     "| o_o | ", 
@@ -47,36 +79,44 @@ camel = Shape("camel",
     ".'\  \__\  __.'.'  ",
     "  )\ |  )\ |       ",
     " // \\\\ // \\\\   ",
-    "||_  \\\\|_  \\\\_ ",
-    "'--' '--'' '--'    ")
+    "||_  \\\\|_  \\\\_ ")
 camel.addToShapeList()
 
+# random choice of the shape to guess
 question = random.choice(shape_list)
 
-print("")
-print(question.lines[0])
-print("")
+# start of the game
+print(game.double_line)
+print(game.instructions)
+print(game.double_line)
 
-answer1 = input("Try to guess the shape: \n")
+# counter
+i = 1
 
-if answer1 == question.name:
-    print('\nFirst try and You are right!\n')
-    question.printFullAnswer()
-    exit()
-else:
-    print("")
-    print(question.lines[0])
-    print(question.lines[1])
-    print("")
-    answer2 = input("Try again: \n")
+# check if there is more to show
+while i < len(question.lines):
+    print("\nHere's the hint.\n")
+    
+    # show more of the shape
+    lines_to_print = range(i)
+    for line_to_print in lines_to_print:
+        print(question.lines[line_to_print])
 
-if answer2 == question.name:
-    print('\nSecond try and You are right!\n')
-    question.printFullAnswer()
-    exit()
-else:
-    print("")
-    question.printFullAnswer()
-    print("The right answere was: " + question.name + ".")
-    print("")
-    exit()
+    # user input
+    answer = input("\nType in your guess: ")
+    print(game.double_line)
+
+    # check the answer
+    if answer.lower() == question.name:
+        question.printFullAnswer()
+        print("Congratulations! \"" + question.name.capitalize() + "\" was the right answer.\n")
+        game.playAgain()
+    else:
+        print("\nSorry, \"" + answer.lower() + "\" is wrong answer!")
+        i += 1
+
+# if no more to show - end the game
+question.printFullAnswer()
+print("Game over! The right answer was: \"" + question.name + "\".\n")
+game.playAgain()
+
