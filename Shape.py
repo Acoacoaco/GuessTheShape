@@ -60,7 +60,7 @@ class Game:
     def wrongAnswerInfo(self):
         print("\nSorry, \"" + answer.lower() + "\" is wrong answer!")
 
-    # informa about game over
+    # inform about game over
     def gameOver(self):
         print("Game over! The right answer was: \"" + question.name + "\".\n")
 
@@ -79,7 +79,7 @@ class Game:
         import sys
         print("The game will restart now.")
         import os
-        os.execv(sys.executable, ['python'] + sys.argv)
+        os.execl(sys.executable, sys.executable, *sys.argv)
 
 # game
 game = Game()
