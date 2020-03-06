@@ -66,10 +66,10 @@ class Game:
 
     # ask user to play again
     def playAgain(self):
-        restart = input("Do you want to play again? [y/n]: ")
-        if restart == "y":
+        more_play = input("Do you want to play again? [y/n]: ")
+        if more_play == "y":
             self.gameRestart()
-        elif restart == "n":
+        elif more_play == "n":
             exit()
         else:
             print("Wrong command!")
@@ -86,15 +86,15 @@ game = Game()
 
 # shapes
 cat = Shape("cat", 
-    "|\\---/|", 
-    "| o_o | ", 
-    " \\_V_/ ")
+    "|\---/|", 
+    "| o_o |", 
+    " \_V_/ ")
 cat.addToShapeList()
 
 house = Shape("house",
-    "  /\\   ", 
-    " /\\-\\ ", 
-    "_||\"|_ ")
+    "  /\   ", 
+    " /\-\  ", 
+    "_||\"|_")
 house.addToShapeList()
 
 car = Shape("car",
@@ -104,9 +104,14 @@ car = Shape("car",
 car.addToShapeList()
 
 dog = Shape("dog",
-    " (___()'`;   ",
-    " /,    /`    ",
-    " \\\"--\\\", ")
+    "       _=,_           ",
+    "    o_/6 /#\          ",
+    "   \__ |##/           ",
+    "    =\'|--\           ",
+    "      /    #'-.       ",
+    "      \\#|_   _\'-. / ",
+    "       |/ \_( # |\"   ",
+    "      C/ ,--___/      ")
 dog.addToShapeList()
 
 camel = Shape("camel",
@@ -116,9 +121,28 @@ camel = Shape("camel",
     "  /        \_/ / | ",
     ".'\  \__\  __.'.'  ",
     "  )\ |  )\ |       ",
-    " // \\\\ // \\\\   ",
-    "||_  \\\\|_  \\\\_ ")
+    " // \\\ // \\\       ",
+    "||_  \\\|_  \\\_     ")
 camel.addToShapeList()
+
+bicycle = Shape("bicycle",     
+    "              d$$$$$$$P\"                  $    J              ",
+    "                  ^$.                     4r  \"               ",
+    "                  d\"b                    .db                  ",
+    "                 P   $                  e\" $                  ",
+    "        ..ec.. .\"     *.              zP   $.zec..            ",
+    "     .^        3*b.     *.           .P\" .@\"4F      \"4      ",
+    "   .\"         d\"  ^b.    *c        .$\"  d\"   $         %   ",
+    "  /          P      $.    \"c      d\"   @     3r         3    ",
+    " 4        .eE........$r===e$$$$eeP    J       *..        b     ",
+    " $       $$$$$       $   4$$$$$$$     F       d$$$.      4     ",
+    " $       $$$$$       $   4$$$$$$$     L       *$$$\"      4    ",
+    " 4         \"      \"\"3P ===$$$$$$\"     3                  P ",
+    "  *                 $       \"\"\"        b                J   ",
+    "   \".             .P                    %.             @      ",
+    "     %.         z*\"                      ^%.        .r\"      ",
+    "       \"*==*\"\"                             ^\"*==*\"\"      ")
+bicycle.addToShapeList()
 
 # random choice of the shape to guess
 question = game.chooseShape()
