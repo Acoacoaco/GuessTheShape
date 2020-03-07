@@ -55,6 +55,10 @@ class Game:
     def rightAnswerInfo(self):
         question.printFullShape()
         print("Congratulations! \"" + question.name.capitalize() + "\" was the right answer.\n")
+        if points == 1:
+            print("You earned 1 point!")
+        else:
+            print("You earned " + str(points) + " points!")
 
     # inform about wrong answer
     def wrongAnswerInfo(self):
@@ -147,6 +151,9 @@ bicycle.addToShapeList()
 # random choice of the shape to guess
 question = game.chooseShape()
 
+# points to earn
+points = len(question.lines)-1
+
 # start of the game
 print(game.double_line)
 print(game.instructions)
@@ -155,13 +162,15 @@ print(game.double_line)
 # check if there is more to show
 while game.counter < len(question.lines):
     game.giveHint()
-
+    print("\nPoints to earn: "+ str(points))
+    
     # user input
-    answer = input("\nType in your guess: ")
+    answer = input("Type in your guess: ")
     print(game.double_line)
 
     # check the input
     game.checkAnswer()
+    points -= 1
 
 # if no more to show - end the game
 question.printFullShape()
